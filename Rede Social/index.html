@@ -1,23 +1,307 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhas Redes Sociais</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juarez Filho — Portfólio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #11161c;
+    --surface: #171e26;
+    --border: #262f3a;
+    --text: #dbe2ea;
+    --muted: #7c8a9a;
+    --amber: #e8a33d;
+    --teal: #5fd4c4;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  .mono{ font-family: 'IBM Plex Mono', monospace; }
+
+  .wrap{
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---- Hero ---- */
+  header.hero{
+    padding: 96px 0 64px;
+    border-bottom: 1px solid var(--border);
+  }
+  .prompt{
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--teal);
+    font-size: 14px;
+    margin: 0 0 20px;
+  }
+  .prompt .user{ color: var(--amber); }
+  .prompt .cursor{
+    display:inline-block;
+    width: 8px; height: 16px;
+    background: var(--teal);
+    margin-left: 4px;
+    vertical-align: -2px;
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .hero-body{
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+  }
+  .hero-photo{
+    width: 92px; height: 92px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  h1{
+    font-size: 28px;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .role{
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--amber);
+    font-size: 14px;
+    margin: 0 0 16px;
+  }
+  .hero-body p{
+    color: var(--muted);
+    margin: 0;
+    max-width: 50ch;
+  }
+  .hero-body p strong{ color: var(--text); font-weight: 600; }
+
+  /* ---- Sections ---- */
+  section{ padding: 56px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type{ border-bottom: none; }
+  .section-label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0 0 24px;
+  }
+  .section-label .user{ color: var(--amber); }
+  .section-label .cmd{ color: var(--teal); }
+
+  /* ---- Skills ---- */
+  .skills{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    padding: 0; margin: 0;
+  }
+  .skills li{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 12px;
+  }
+
+  /* ---- Projects ---- */
+  .project{
+    border-left: 2px solid var(--border);
+    padding: 4px 0 4px 20px;
+    margin-bottom: 36px;
+    position: relative;
+  }
+  .project:last-child{ margin-bottom: 0; }
+  .project::before{
+    content: '';
+    position: absolute;
+    left: -5px; top: 8px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+  .project h3{
+    margin: 0 0 6px;
+    font-size: 17px;
+  }
+  .project .stack{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--amber);
+    margin: 0 0 10px;
+  }
+  .project p{
+    color: var(--muted);
+    margin: 0 0 12px;
+    max-width: 56ch;
+  }
+  .project a{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--teal);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .project a:hover{ border-bottom-color: var(--teal); }
+
+  /* ---- Contact ---- */
+  .contact-list{
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .contact-list a{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+  }
+  .contact-list a:hover{ color: var(--teal); }
+  .contact-list svg{ flex-shrink: 0; color: var(--muted); }
+  .contact-list a:hover svg{ color: var(--teal); }
+  .handle{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  footer{
+    padding: 32px 0 64px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 480px){
+    header.hero{ padding: 64px 0 48px; }
+    .hero-body{ flex-direction: column; gap: 20px; }
+    h1{ font-size: 24px; }
+  }
+
+  a:focus-visible, .project:focus-visible{
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cursor{ animation: none; opacity: 1; }
+  }
+</style>
 </head>
 <body>
-    <h1>Minhas Redes Sociais</h1>
-    <h2>Quem sou eu?</h2>
-    <img src="imagens/IMG CV.png" alt="Imagem de Perfil">
-    <p>Olá recrutador me chamo <strong>Juarez Filho</strong>, sou aluno de Ciência da Computação na Universidade Estácio de Sá e hoje procuro uma vaga como <strong>desenvolvedor</strong>. Possuo conhecimentos básicos em Python, Java, PHP, SQL e HTML/CSS.Procuro sempre estar evoluindo e me mantendo atualizado sobre novas tecnologias.</p>
-    <h2>Como falar comigo?</h2>
-    <ul>
-        <li><img src="imagens/icone-instagram.png" alt=""> <a href="">https://www.instagram.com/juarezfilhoii/</a>  - Me siga no Instagram</li>
-        <li><img src="imagens/icone-facebook.png" alt=""> <a href="">https://www.facebook.com/juarez.filho.77</a>  - Me adicione no Facebook</li>
-        <li><img src="imagens/icone-linkedin.png" alt=""> <a href="">https://www.linkedin.com/in/juarez-delba-mota-filho-194b53185/</a>  - Veja meu perfil no Linkedin</li>
-        <li><img src="imagens/icone-twitter.png" alt=""> <a href="">https://twitter.com/juarezfilhoii</a>  - Me siga no Twitter</li>
-        <li><img src="imagens/icone-github.png" alt=""> <a href="">https://github.com/juarezfilhoii</a>  - Conheça meus repositórios</li>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="prompt"><span class="user">juarez@portfolio</span>:~$ whoami<span class="cursor"></span></p>
+    <div class="hero-body">
+      <img class="hero-photo" src="imagens/IMG CV.png" alt="Foto de Juarez Filho">
+      <div>
+        <h1>Juarez Filho</h1>
+        <p class="role">Suporte Técnico &amp; Cloud Computing</p>
+        <p>Bacharel em Ciência da Computação e pós-graduado em <strong>Cloud Computing</strong>. Atuo com suporte técnico especializado e venho aplicando na prática o que estudei — Docker, AWS e arquitetura de infraestrutura — em projetos reais, alguns deles no ar agora mesmo.</p>
+      </div>
+    </div>
+  </header>
+
+  <section id="skills">
+    <p class="section-label"><span class="user">juarez@portfolio</span>:~$ <span class="cmd">ls</span> habilidades/</p>
+    <ul class="skills">
+      <li>Docker</li>
+      <li>AWS</li>
+      <li>Git</li>
+      <li>Python</li>
+      <li>Java</li>
+      <li>PHP</li>
+      <li>SQL</li>
+      <li>HTML/CSS</li>
+      <li>Linux</li>
     </ul>
+  </section>
+
+  <section id="projetos">
+    <p class="section-label"><span class="user">juarez@portfolio</span>:~$ <span class="cmd">git log</span> --projetos</p>
+
+    <div class="project">
+      <h3>GLPI Dockerizado</h3>
+      <p class="stack">Docker · Docker Compose · AWS EC2 · MariaDB</p>
+      <p>Migração de uma instalação real do GLPI (Ubuntu, instalação manual) para containers Docker, com backup e restauração completa de dados — validado migrando um chamado real com anexo — e deploy em uma instância AWS.</p>
+      <a href="#">./ver repositório</a>
+    </div>
+
+    <div class="project">
+      <h3>Serverless Visitor Counter</h3>
+      <p class="stack">AWS Lambda · DynamoDB · Python</p>
+      <p>API serverless que conta visitas em tempo real, sem nenhum servidor rodando continuamente — Lambda e DynamoDB operando dentro do Always Free Tier da AWS, custo zero.</p>
+      <a href="#">./ver repositório</a>
+    </div>
+  </section>
+
+  <section id="contato">
+    <p class="section-label"><span class="user">juarez@portfolio</span>:~$ <span class="cmd">cat</span> contato.txt</p>
+    <ul class="contact-list">
+      <li>
+        <a href="https://github.com/juarezfilhoii" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+          <span class="handle">@juarezfilhoii</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/juarezfilho/" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+          <span class="handle">Juarez Filho</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.instagram.com/juarezfilhoii/" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Instagram
+          <span class="handle">@juarezfilhoii</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://x.com/juarezfilhoii" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+          Twitter
+          <span class="handle">@juarezfilhoii</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.facebook.com/juarez.filho.77" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          Facebook
+          <span class="handle">juarez.filho.77</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>feito com HTML &amp; CSS puro · hospedado no GitHub Pages</p>
+  </footer>
+
+</div>
+
 </body>
 </html>
